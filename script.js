@@ -1,8 +1,9 @@
 let array = [];
 
 function generateArray() {
+    const size = parseInt(document.getElementById('array-size').value);
     array = [];
-    for (let i = 0; i < 20; i++) {
+    for (let i = 0; i < size; i++) {
         array.push(Math.floor(Math.random() * 300) + 20);
     }
     displayArray();
@@ -28,7 +29,7 @@ async function sortArray() {
     else if (algo === 'merge') await mergeSortWrapper();
 }
 
-// Utility to pause for visualization
+// Pause for animation
 function sleep(ms) {
     return new Promise(resolve => setTimeout(resolve, ms));
 }
@@ -37,11 +38,11 @@ function sleep(ms) {
 async function bubbleSort() {
     for (let i = 0; i < array.length; i++) {
         for (let j = 0; j < array.length - i - 1; j++) {
-            displayArray([j, j+1]);
+            displayArray([j, j + 1]);
             await sleep(200);
             if (array[j] > array[j + 1]) {
                 [array[j], array[j + 1]] = [array[j + 1], array[j]];
-                displayArray([j, j+1]);
+                displayArray([j, j + 1]);
                 await sleep(200);
             }
         }
@@ -72,12 +73,12 @@ async function insertionSort() {
         let j = i - 1;
         while (j >= 0 && array[j] > key) {
             array[j + 1] = array[j];
-            displayArray([j, j+1]);
+            displayArray([j, j + 1]);
             await sleep(200);
             j--;
         }
         array[j + 1] = key;
-        displayArray([j+1]);
+        displayArray([j + 1]);
         await sleep(200);
     }
     displayArray();
@@ -100,13 +101,25 @@ async function mergeSort(arr) {
 
 async function merge(left, right) {
     let result = [];
-    while (left.length && right.length) {
-        displayArray(array.map(v => (left.includes(v) || right.includes(v)) ? v : 0));
+    let l = 0, r = 0;
+    while (l < left.length && r < right.length) {
+        let leftVal = left[l];
+        let rightVal = right[r];
+        let highlightIndices = [];
+        if (array.includes(leftVal)) highlightIndices.push(array.indexOf(leftVal));
+        if (array.includes(rightVal)) highlightIndices.push(array.indexOf(rightVal));
+        displayArray(highlightIndices);
         await sleep(200);
-        if (left[0] < right[0]) result.push(left.shift());
-        else result.push(right.shift());
+
+        if (leftVal < rightVal) {
+            result.push(leftVal);
+            l++;
+        } else {
+            result.push(rightVal);
+            r++;
+        }
     }
-    result = result.concat(left).concat(right);
+    result = result.concat(left.slice(l)).concat(right.slice(r));
     array = result.concat(array.slice(result.length));
     displayArray();
     await sleep(200);

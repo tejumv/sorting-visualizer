@@ -1,11 +1,12 @@
 body {
     font-family: Arial, sans-serif;
     text-align: center;
-    background-color: #f5f5f5;
+    background-color: #000; /* Black background */
+    color: #fff;
 }
 
 h1 {
-    color: #333;
+    color: #fff;
 }
 
 .controls {
@@ -23,9 +24,10 @@ h1 {
 .array-bar {
     width: 20px;
     margin: 0 2px;
-    background-color: #4CAF50;
-    text-align: center;
+    background-color: #a3d2ca; /* pastel base color */
+    transition: all 0.2s ease;
 }
+
 .array-bar.active {
-    background-color: #FF4136;
+    background-color: #ff6f61; /* lights up when moving */
 }

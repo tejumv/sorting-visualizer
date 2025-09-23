@@ -31,15 +31,27 @@ function sleep(ms) {
   return new Promise(resolve => setTimeout(resolve, ms));
 }
 
-// Swap DOM elements for sliding
-function swapDOM(i, j) {
-  const cards = container.children;
+// Swap cards visually with sliding
+async function swapCards(i, j) {
+  const cards = Array.from(container.children);
   const cardI = cards[i];
   const cardJ = cards[j];
-  container.insertBefore(cardJ, cardI);
+
+  const distance = cardJ.offsetLeft - cardI.offsetLeft;
+
+  cardI.style.transform = `translateX(${distance}px)`;
+  cardJ.style.transform = `translateX(${-distance}px)`;
+
+  await sleep(400);
+
+  cardI.style.transform = '';
+  cardJ.style.transform = '';
+
+  if (i < j) container.insertBefore(cardJ, cardI);
+  else container.insertBefore(cardI, cardJ);
 }
 
-// Event listener for sort method
+// Sort method selection
 sortSelect.addEventListener("change", async () => {
   const method = sortSelect.value;
   if (method === "bubble") await bubbleSort();
@@ -47,42 +59,41 @@ sortSelect.addEventListener("change", async () => {
   else if (method === "insertion") await insertionSort();
 });
 
-// Bubble Sort with sliding
+// Bubble Sort
 async function bubbleSort() {
   const size = array.length;
   for (let i = 0; i < size - 1; i++) {
     for (let j = 0; j < size - i - 1; j++) {
       renderArray([j, j + 1]);
-      await sleep(400);
-
+      await sleep(200);
       if (array[j] > array[j + 1]) {
         [array[j], array[j + 1]] = [array[j + 1], array[j]];
-        swapDOM(j, j + 1);
+        await swapCards(j, j + 1);
       }
     }
   }
   renderArray();
 }
 
-// Selection Sort with sliding
+// Selection Sort
 async function selectionSort() {
   const size = array.length;
   for (let i = 0; i < size; i++) {
     let minIdx = i;
     for (let j = i + 1; j < size; j++) {
       renderArray([minIdx, j]);
-      await sleep(400);
+      await sleep(200);
       if (array[j] < array[minIdx]) minIdx = j;
     }
     if (minIdx !== i) {
       [array[i], array[minIdx]] = [array[minIdx], array[i]];
-      swapDOM(i, minIdx);
+      await swapCards(i, minIdx);
     }
   }
   renderArray();
 }
 
-// Insertion Sort with sliding
+// Insertion Sort
 async function insertionSort() {
   const size = array.length;
   for (let i = 1; i < size; i++) {
@@ -90,9 +101,9 @@ async function insertionSort() {
     let j = i - 1;
     while (j >= 0 && array[j] > key) {
       renderArray([j, j + 1]);
-      await sleep(400);
+      await sleep(200);
       array[j + 1] = array[j];
-      swapDOM(j, j + 1);
+      await swapCards(j, j + 1);
       j--;
     }
     array[j + 1] = key;

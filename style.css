@@ -65,14 +65,13 @@ body {
   height: 120px;
   margin: 30px auto;
   width: 100%;
-  max-width: 800px;
+  max-width: 900px;
 }
 
-/* Neon pastel cards */
+/* Neon pastel cards with multiple colors */
 .card {
   width: 80px;
   height: 80px;
-  background-color: #ffc8dd;
   border: 3px solid #ff69b4;
   border-radius: 12px;
   display: flex;
@@ -83,11 +82,10 @@ body {
   color: #000;
   position: absolute;
   top: 0;
-  transition: transform 0.5s ease;
+  transition: transform 0.5s ease, left 0.5s ease;
 }
 
 .card.active {
-  background-color: #ffafcc;
   transform: scale(1.2);
 }
 

@@ -32,25 +32,32 @@ button:hover {
 #array-container {
   display: flex;
   justify-content: center;
-  align-items: flex-end;
+  flex-wrap: wrap;
   margin-top: 40px;
-  gap: 10px;
+  gap: 20px;
 }
 
+/* --- CARD STYLE FOR ARRAY ELEMENTS --- */
 .bar {
-  width: 50px;
+  width: 80px;
   height: 100px;
-  background-color: #cdb4db; /* pastel purple */
-  color: #000;
+  background-color: #2c2c2c;
+  border: 2px solid #f7cad0; /* pastel pink border */
+  border-radius: 12px;
+  box-shadow: 0 4px 10px rgba(247, 202, 208, 0.4);
   display: flex;
   justify-content: center;
-  align-items: flex-end;
+  align-items: center;
+  font-size: 1.2rem;
   font-weight: bold;
-  border-radius: 5px;
-  transition: transform 0.3s, background-color 0.3s;
+  color: #f7cad0; /* pastel pink text */
+  transition: transform 0.3s, background-color 0.3s, box-shadow 0.3s;
 }
 
+/* Highlight while swapping */
 .bar.active {
   background-color: #ffafcc; /* pastel highlight */
+  color: #000;
   transform: translateY(-10px);
+  box-shadow: 0 6px 15px rgba(255, 175, 204, 0.7);
 }

@@ -7,7 +7,7 @@ body {
 }
 
 .title {
-  color: #ffb6c1; /* pastel pink */
+  color: #ffb6c1;
   font-size: 4rem;
   font-weight: bold;
   text-shadow: 0 0 10px #ff69b4, 0 0 20px #ff69b4;
@@ -61,12 +61,11 @@ body {
 }
 
 #array-container {
-  display: flex;
-  justify-content: center;
-  flex-wrap: wrap;
-  margin-top: 30px;
-  gap: 15px;
   position: relative;
+  height: 120px;
+  margin: 30px auto;
+  width: 100%;
+  max-width: 800px;
 }
 
 /* Neon pastel cards */
@@ -82,8 +81,9 @@ body {
   font-size: 1.5rem;
   font-weight: bold;
   color: #000;
-  position: relative; /* needed for sliding */
-  transition: transform 0.4s ease;
+  position: absolute;
+  top: 0;
+  transition: transform 0.5s ease;
 }
 
 .card.active {

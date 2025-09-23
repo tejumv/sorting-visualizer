@@ -1,32 +1,23 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sorting Algorithm Visualizer</title>
-    <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sorting Visualizer - Squares</title>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <h1>Sorting Algorithm Visualizer</h1>
+  <h1>Sorting Visualizer</h1>
 
-    <div class="controls">
-        <label>Array Size:
-            <input type="number" id="array-size" min="5" max="50" value="20">
-        </label>
-        <label>Algorithm:
-            <select id="algorithm">
-                <option value="bubble">Bubble Sort</option>
-                <option value="selection">Selection Sort</option>
-                <option value="insertion">Insertion Sort</option>
-                <option value="merge">Merge Sort</option>
-            </select>
-        </label>
-        <button onclick="generateArray()">Generate Array</button>
-        <button onclick="sortArray()">Sort</button>
-    </div>
+  <div class="controls">
+    <label for="array-size">Array Size:</label>
+    <input type="number" id="array-size" min="2" max="20" value="5">
+    <button onclick="generateArray()">Generate Array</button>
+    <button onclick="bubbleSort()">Bubble Sort</button>
+  </div>
 
-    <div id="array-container"></div>
+  <div id="array-container"></div>
 
-    <script src="script.js"></script>
+  <script src="script.js"></script>
 </body>
 </html>

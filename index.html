@@ -10,13 +10,22 @@
   <h1 class="title">Sorting Visualizer</h1>
 
   <div class="controls">
-    <label for="size">Choose Array Size: </label>
-    <input type="number" id="size" min="3" max="20" value="5">
-    <button onclick="generateArray()">Generate</button>
-    <button onclick="bubbleSort()">Sort</button>
+    <label for="size" class="subtitle">Enter Array Size:</label>
+    <input type="number" id="size" min="3" max="15" value="5" class="input-box">
+    <button onclick="generateArray()" class="btn">Generate Array</button>
   </div>
 
   <div id="array-container"></div>
+
+  <div id="method-container" class="controls hidden">
+    <label class="subtitle">Choose Sorting Method:</label>
+    <select id="sort-method" class="dropdown">
+      <option value="">--Select--</option>
+      <option value="bubble">Bubble Sort</option>
+      <option value="selection">Selection Sort</option>
+      <option value="insertion">Insertion Sort</option>
+    </select>
+  </div>
 
   <script src="script.js"></script>
 </body>

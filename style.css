@@ -1,14 +1,16 @@
 body {
-  background-color: #0b0c10; /* deep black/navy */
-  font-family: 'Brush Script MT', cursive; /* cursive font */
+  background-color: #0b0c10;
+  font-family: 'Pacifico', cursive;
   text-align: center;
   margin: 0;
   padding: 0;
 }
 
 .title {
-  color: #f7cad0; /* pastel pink */
-  font-size: 3rem;
+  color: #ffb6c1; /* pastel pink */
+  font-size: 4rem;
+  font-weight: bold;
+  text-shadow: 0 0 10px #ff69b4, 0 0 20px #ff69b4;
   margin: 30px 0;
 }
 
@@ -20,42 +22,41 @@ body {
 }
 
 .input-box {
-  padding: 8px 12px;
-  border: 2px solid #f7cad0;
-  border-radius: 10px;
+  padding: 10px 15px;
+  border: 2px solid #ff69b4;
+  border-radius: 12px;
   font-size: 1rem;
   background-color: #1f1f1f;
-  color: #f7cad0;
+  color: #ffb6c1;
   outline: none;
 }
 
 .input-box:focus {
-  border-color: #cdb4db;
-  box-shadow: 0 0 8px #cdb4db;
+  border-color: #ffb6c1;
+  box-shadow: 0 0 8px #ffb6c1;
 }
 
 .btn {
-  background-color: #a7c7e7; /* pastel blue */
+  background-color: #a7c7e7;
   border: none;
   padding: 10px 20px;
   margin: 10px;
   border-radius: 12px;
   font-size: 1rem;
   cursor: pointer;
-  font-family: 'Brush Script MT', cursive;
 }
 
 .btn:hover {
-  background-color: #fbc4ab; /* pastel coral */
+  background-color: #fbc4ab;
 }
 
 .dropdown {
   padding: 8px 12px;
-  border: 2px solid #f7cad0;
+  border: 2px solid #ff69b4;
   border-radius: 10px;
   font-size: 1rem;
   background-color: #1f1f1f;
-  color: #f7cad0;
+  color: #ffb6c1;
   outline: none;
 }
 
@@ -65,25 +66,28 @@ body {
   flex-wrap: wrap;
   margin-top: 30px;
   gap: 15px;
+  position: relative;
 }
 
-/* Square pastel boxes */
+/* Card style with neon border and pastel fill */
 .card {
   width: 80px;
   height: 80px;
-  background-color: #cdb4db; /* pastel lilac default */
-  border-radius: 10px;
+  background-color: #ffc8dd;
+  border: 3px solid #ff69b4;
+  border-radius: 12px;
   display: flex;
   justify-content: center;
   align-items: center;
-  font-size: 1.3rem;
+  font-size: 1.5rem;
   font-weight: bold;
   color: #000;
-  transition: transform 0.5s ease, background-color 0.3s ease;
+  transition: transform 0.5s ease, left 0.5s ease;
+  position: relative;
 }
 
 .card.active {
-  background-color: #ffafcc; /* pastel highlight */
+  background-color: #ffafcc;
   transform: scale(1.2);
 }
 

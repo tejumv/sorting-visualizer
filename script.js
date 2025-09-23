@@ -16,7 +16,6 @@ function renderArray(highlightIndices = []) {
     const bar = document.createElement("div");
     bar.classList.add("bar");
     if (highlightIndices.includes(i)) bar.classList.add("active");
-    bar.style.height = `${num * 3}px`; 
     bar.textContent = num;
     container.appendChild(bar);
   });

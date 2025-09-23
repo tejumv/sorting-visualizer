@@ -1,84 +1,101 @@
 let array = [];
+const container = document.getElementById("array-container");
+const sortSelect = document.getElementById("sort-method");
 
+// Generate Array
 function generateArray() {
   const size = document.getElementById("size").value;
   array = [];
+  container.innerHTML = "";
   for (let i = 0; i < size; i++) {
     array.push(Math.floor(Math.random() * 100) + 1);
   }
   renderArray();
   document.getElementById("method-container").classList.remove("hidden");
-
-  document.getElementById("sort-method").addEventListener("change", () => {
-    const method = document.getElementById("sort-method").value;
-    document.getElementById("method-container").classList.add("hidden");
-    if (method === "bubble") bubbleSort();
-    else if (method === "selection") selectionSort();
-    else if (method === "insertion") insertionSort();
-  });
 }
 
+// Render Array
 function renderArray(highlightIndices = []) {
-  const container = document.getElementById("array-container");
   container.innerHTML = "";
   array.forEach((num, i) => {
     const card = document.createElement("div");
     card.classList.add("card");
     if (highlightIndices.includes(i)) card.classList.add("active");
-    card.style.backgroundColor = pastelColor(i); // assign pastel colors
     card.textContent = num;
     container.appendChild(card);
   });
 }
 
-function pastelColor(index) {
-  const colors = ["#cdb4db", "#ffc8dd", "#bde0fe", "#a2d2ff", "#fbc4ab", "#ffafcc"];
-  return colors[index % colors.length];
+// Sleep helper
+function sleep(ms) {
+  return new Promise(resolve => setTimeout(resolve, ms));
 }
 
+// Swap DOM elements for sliding
+function swapDOM(i, j) {
+  const cards = container.children;
+  const cardI = cards[i];
+  const cardJ = cards[j];
+  container.insertBefore(cardJ, cardI);
+}
+
+// Event listener for sort method
+sortSelect.addEventListener("change", async () => {
+  const method = sortSelect.value;
+  if (method === "bubble") await bubbleSort();
+  else if (method === "selection") await selectionSort();
+  else if (method === "insertion") await insertionSort();
+});
+
+// Bubble Sort with sliding
 async function bubbleSort() {
-  for (let i = 0; i < array.length - 1; i++) {
-    for (let j = 0; j < array.length - i - 1; j++) {
+  const size = array.length;
+  for (let i = 0; i < size - 1; i++) {
+    for (let j = 0; j < size - i - 1; j++) {
       renderArray([j, j + 1]);
-      await sleep(600);
+      await sleep(400);
+
       if (array[j] > array[j + 1]) {
         [array[j], array[j + 1]] = [array[j + 1], array[j]];
+        swapDOM(j, j + 1);
       }
     }
   }
   renderArray();
 }
 
+// Selection Sort with sliding
 async function selectionSort() {
-  for (let i = 0; i < array.length; i++) {
+  const size = array.length;
+  for (let i = 0; i < size; i++) {
     let minIdx = i;
-    for (let j = i + 1; j < array.length; j++) {
+    for (let j = i + 1; j < size; j++) {
       renderArray([minIdx, j]);
-      await sleep(600);
-      if (array[j] < array[minIdx]) {
-        minIdx = j;
-      }
+      await sleep(400);
+      if (array[j] < array[minIdx]) minIdx = j;
     }
-    [array[i], array[minIdx]] = [array[minIdx], array[i]];
+    if (minIdx !== i) {
+      [array[i], array[minIdx]] = [array[minIdx], array[i]];
+      swapDOM(i, minIdx);
+    }
   }
   renderArray();
 }
 
+// Insertion Sort with sliding
 async function insertionSort() {
-  for (let i = 1; i < array.length; i++) {
+  const size = array.length;
+  for (let i = 1; i < size; i++) {
     let key = array[i];
     let j = i - 1;
     while (j >= 0 && array[j] > key) {
       renderArray([j, j + 1]);
-      await sleep(600);
+      await sleep(400);
       array[j + 1] = array[j];
+      swapDOM(j, j + 1);
       j--;
     }
     array[j + 1] = key;
   }
   renderArray();
-}
-
-function sleep(ms) {
-  return new Promise(resolve => setTimeout(resolve, ms));
 }
